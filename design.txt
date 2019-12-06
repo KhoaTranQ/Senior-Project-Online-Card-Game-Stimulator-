@@ -1,0 +1,126 @@
+Depth list (higher on the list is higher/closer in-game):
+
+Context menu
+Standard menus
+Zoom
+Selected
+Search/View
+Hand
+Decks
+Free cards
+Battlefield
+
+
+Hand:
+A panel permanently at the bottom of the screen. It will have a list of cards that are in it. The cards are positioned in hand panel.
+Dropping a selected card into the hand will add it to the hand.
+Selecting a card from the hand and dropping it in another zone will remove it from the hand.
+
+View/Search:
+Opened from a deck's context menu. A panel that appears when opened. Probably shouldn't overlap the hand. Contains a list of cards---the same cards as the deck.
+The cards are activated and moved to positions within the panel. The panel will probably need a scroll bar, or page navigation.
+
+Zoom:
+Displays the card. Not necessarily the card's native resolution.
+It should probably be made a set size. Either completely static or based on the size of the window.
+
+Random Number Generator (RNG):
+The RNG will be accessible from anywhere using the context menu. Allows to enter a minimum possible number and maximum possible number.
+e.g. a dice roll would be 1--6. A coin could be 0--1. A number from within that range (inclusive) will be randomly generated and displayed to both players.
+Use GMS's built-in get_integer() or get_integer_async() functions. async would probably be preferable, but for our purposes the non-async may be sufficient. If non-async does have a problem, it's probably with multiplayer
+
+Empty decks:
+A "deck" which is allowed to be empty, so cards can be placed into it. Important for discard piles. Will need some kind of graphical marker.
+Will probably just modify existing decks to meet this requirement.
+	-OR-
+Ability to convert free cards into a deck. So when the first card is discarded, a deck is created with it.
+Will probably still want a way to distinguish decks from cards.
+
+Rotation:
+Right clicking a card will give the option to rotate it. Preset amounts and/or a dialog box asking for degrees are possible. A different version
+which sets the rotation directly to a specified value rather than adding/subtracting is also possible.
+
+Flipping:
+Right clicking a card or deck will give the option to flip it. uh... that's about it. Make the sure origins are set correctly.
+
+Context menu		-8
+Standard menus		-7
+Zoom				-6
+Selected			-5
+Search/View cards	-4
+Search/View			-3
+Hand cards			-1.5 to -2.5
+Hand				-1 
+Decks				0
+Free cards			1+
+Tabletop			infinity
+
+Decks:
+Decks are compressed zip files with the extension changed to ".deck". The file contains all the images used in the deck and a file named
+"info.xml" which describes the structure of the deck. The XML has a field for each card, and a global field that applies to every card that doesn't
+specify its own attribute. For example, if the global has a field for "back image", then that back image will be used for EVERY card, except for cards
+which specify their own "back image". If the global also has other attributes, than this card will still inherit those unless it also specifies that
+attribute as well. Attributes include width, height, front image, and back image. Each card can also specify how many copies of it are in the deck.
+
+Input Manager:
+Most input will be managed globally, instead of having each object handle their own input. Because of the nature of card games, which are cursor-driven,
+this should be preferable for most functions. There may be some exceptions, for example menu/navigation buttons.
+
+Multiplayer:
+In multiplayer, certain actions will effect both players in the same way. This includes card and deck positions. The gamestate will preiodically
+be checked and sent to the other player to guarantee synchronisation. 
+
+Creating/Hosting a multiplayer game:
+The player will select "Host" from the main menu. If possible, their external IP address will be shown.
+Otherwise, they will be directed to a website where they can find it.
+It can then be given to another player, so they will know what address to connect to.
+
+Connecting to a multiplayer game:
+The player will select "Connect" from the main menu. They will then be prompted for an IP address and port number. The game client will attempt to make
+a connection to another client. If successful, a multiplayer game will begin.
+
+Importing a deck:
+The player will be able to use the context menu to import a deck. They will be prompted for the location of their deck. The deck will then be
+unzipped to the game's working directory, and the files will be used to generate sprites and objects. Once they have been created, the files will
+be deleted.
+
+In multiplayer, the deck is sent to the other player as well.
+
+Hand:
+A panel permanently at the bottom of the screen. It will have a list of cards that are in it. Cards will fill the panel from left to right, until
+there is not enough space to fill the hand. Then all the cards will be distributed evenly across the hand. Dropping a selected card into the hand will add it to the hand. Selecting a card from the hand and dropping it in another zone will remove it from the hand.
+
+In multiplayer, your own hand function the same, but for the other player, only a counter showing how many cards they have in their hand will be shown.
+
+View/Search:
+Opened from a deck's context menu. A panel that appears when opened. Won't overlap the hand. Contains a list of cards---the same cards as the deck.
+The cards are activated and moved to positions within the panel. The panel will have a scroll bar or pages for navigation.
+
+In multiplayer, the other player will not be able to see what you are doing.
+
+Zoom:
+Displays the card. Not necessarily the card's native resolution. Instead, it will be scaled to the largest possible size while remaining in the window without changing its aspect ratio.
+
+This does not effect the other player's view.
+
+Random Number Generator (RNG):
+The RNG will be accessible from anywhere using the context menu. Allows to enter a minimum possible number and maximum possible number.
+e.g. a dice roll would be 1--6. A coin could be 0--1. A number from within that range (inclusive) will be randomly generated and displayed.
+
+In multiplayer, the same number will be displayed to both players.
+
+Create (not import) new decks:
+Ability to convert free cards into a deck. So when the first card is discarded, a deck is created with it.
+
+In multiplayer, the other player will have the same effect.
+
+Rotation:
+Right clicking a card will give the option to rotate it. Preset amounts and/or a dialog box asking for degrees are possible. A different version
+which sets the rotation directly to a specified value rather than adding/subtracting is also possible.
+
+In multiplayer, the other player will have the same effect.
+
+Flipping:
+Right clicking a card or deck will give the option to flip it to show its back image, or to show its front image if it was already on its back.
+
+In multiplayer, the other player will have the same effect.
