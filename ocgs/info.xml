@@ -1,0 +1,29 @@
+<!--This is a comment. Standard in XML.-->
+
+<deck>
+	<!--This is not used to create any card by itself.-->
+	<GLOBAL>
+		<height>88</height>
+		<width>63</width>
+		<back>back.jpg</back>
+	</GLOBAL>
+	
+	<!--This card's height, width, and back are unspecified, so they are inherited from GLOBAL.
+	It it, however, used 4 times in the deck. Instead of repeating it 4 times, copies="4" can be used instead.-->
+	<card copies="4">
+		<img>liliana.jpg</img>
+	</card>
+	
+	<!--This is a rare example of a card that has a unique back-image. Since it is specified it OVERRIDES the GLOBAL <back>.-->
+	<card>
+		<img>villager.jpg</img>
+		<back>werewolf.jpg</back>
+	</card>
+	
+	<!--This card is not supposed to be in the main part of the deck. It is put onto the field as a result
+	of other cards. It cannot be drawn. So, it has a group specified. When importing a deck into a game,
+	you can select which groups to include.-->
+	<card group="tokens">
+		<img>zombie.jpg</img>
+	</card>
+</deck>
